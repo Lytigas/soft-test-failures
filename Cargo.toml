@@ -1,0 +1,7 @@
+[package]
+name = "soft-test-failures"
+version = "0.1.0"
+authors = ["Josh Hejna <josh.hejna@gmail.com>"]
+edition = "2018"
+
+[dependencies]
