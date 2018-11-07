@@ -2,6 +2,10 @@
 name = "soft-test-failures"
 version = "0.1.0"
 authors = ["Josh Hejna <josh.hejna@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "Allow multiple assertions to fail in one test."
+repository = "https://github.com/Lytigas/soft-test-failures"
+readme = "./README.md"
 edition = "2018"
 
 [dependencies]
