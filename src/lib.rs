@@ -2,7 +2,7 @@ use std::cell::RefCell;
 use std::thread_local;
 
 thread_local! {
-    static FAILURES: RefCell<Vec<String>> = RefCell::new(Vec::new());
+    pub static FAILURES: RefCell<Vec<String>> = RefCell::new(Vec::new());
 }
 
 #[macro_export]
