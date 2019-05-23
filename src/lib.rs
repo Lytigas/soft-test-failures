@@ -39,6 +39,7 @@ macro_rules! let_fail {
 }
 
 #[test]
+#[should_panic]
 fn expect_failures() {
     let x = 4;
     let y = "is not";
@@ -47,5 +48,17 @@ fn expect_failures() {
     expect!(1 + 1 == 2);
     expect!(3 - 7 == -4);
     expect!(3 - 7 == -3);
+    let_fail!();
+}
+
+#[test]
+fn expect_pass() {
+    let x = 4;
+    let y = "is not";
+    let z = 5;
+    expect!(2 + 2 == 4, "{} surely {} {}", x, y, z);
+    expect!(1 + 1 == 2);
+    expect!(3 - 7 == -4);
+    expect!(3 - 7 == -4);
     let_fail!();
 }
