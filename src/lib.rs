@@ -2,6 +2,8 @@ use std::cell::RefCell;
 use std::thread_local;
 
 thread_local! {
+    /// Implementation detail; don't use directly
+    #[doc(hidden)]
     pub static FAILURES: RefCell<Vec<String>> = RefCell::new(Vec::new());
 }
 
