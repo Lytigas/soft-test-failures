@@ -1,3 +1,26 @@
+//! This crate trackes assertions during the execution of a test, delaying panicks until the end of execution.
+//! This ensures that if two assertions were to fail, the first does not clobber the second. This is most useful
+//! when writing large tests with many assertions that may begin to fail simultaneously, as you can pinpoint exactly
+//! which ones failed.
+//!
+//! # Usage
+//!
+//! Replace your normal `assert!()` assertions with `expect!()` from this crate. At the end of your test, call `let_fail!()`
+//!
+//! ```rust
+//! #[test]
+//! fn expect_failures() {
+//!     let x = 4;
+//!     let y = "is not";
+//!     let z = 5;
+//!     expect!(2 + 2 == 5, "{} surely {} {}", x, y, z);
+//!     expect!(1 + 1 == 2);
+//!     expect!(3 - 7 == -4);
+//!     expect!(3 - 7 == -3);
+//!     let_fail!();
+//! }
+//! ```
+
 use std::cell::RefCell;
 use std::thread_local;
 
@@ -7,6 +30,7 @@ thread_local! {
     pub static FAILURES: RefCell<Vec<String>> = RefCell::new(Vec::new());
 }
 
+/// Tracks a failed condition like an assertion, but allows test execution to continue.
 #[macro_export]
 macro_rules! expect {
     ($cond:expr) => {{
@@ -19,6 +43,7 @@ macro_rules! expect {
     }};
 }
 
+/// Panics if at least one `expect!()` failed, thus failing the test.
 #[macro_export]
 macro_rules! let_fail {
     () => {
